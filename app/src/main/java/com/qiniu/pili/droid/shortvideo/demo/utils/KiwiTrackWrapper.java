@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.opengl.GLES20;
 import android.os.Build;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.kiwi.tracker.KwFaceTracker;
 import com.kiwi.tracker.KwFilterType;
 import com.kiwi.tracker.KwTrackerManager;
 import com.kiwi.tracker.KwTrackerSettings;
+import com.kiwi.tracker.bean.KwFilter;
 import com.kiwi.tracker.bean.conf.StickerConfig;
 import com.kiwi.tracker.common.Config;
 import com.kiwi.ui.OnViewEventListener;
@@ -70,6 +72,15 @@ public class KiwiTrackWrapper {
 
     public void onCreate(Activity activity) {
         mKwTrackerManager.onCreate(activity);
+    }
+
+    public void setFilter(KwFilter filter, boolean beauty) {
+        if (filter != null && TextUtils.isEmpty(filter.getName())) {
+            mKwTrackerManager.setBeauty2Enabled(true);
+        } else {
+            mKwTrackerManager.setBeauty2Enabled(beauty);
+        }
+        mKwTrackerManager.switchFilter(filter);
     }
 
     public void onResume(Activity activity) {

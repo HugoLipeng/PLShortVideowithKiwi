@@ -1,45 +1,45 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/hugo/Documents/workspace/PLDroidShortVideo/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml:1:1-8:12
-INJECTED from /Users/hugo/Documents/workspace/PLDroidShortVideo/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml:1:1-8:12
-INJECTED from /Users/hugo/Documents/workspace/PLDroidShortVideo/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml:1:1-8:12
-INJECTED from /Users/hugo/Documents/workspace/PLDroidShortVideo/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml:1:1-8:12
-INJECTED from /Users/hugo/Documents/workspace/PLDroidShortVideo/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml:1:1-8:12
-INJECTED from /Users/hugo/Documents/workspace/PLDroidShortVideo/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml:1:1-8:12
-INJECTED from /Users/hugo/Documents/workspace/PLDroidShortVideo/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml:1:1-8:12
+ADDED from /Users/bluecity/Desktop/Work/dev/七牛and Kiwi/七牛/1.15.0/20181212/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml:1:1-8:12
+INJECTED from /Users/bluecity/Desktop/Work/dev/七牛and Kiwi/七牛/1.15.0/20181212/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml:1:1-8:12
+INJECTED from /Users/bluecity/Desktop/Work/dev/七牛and Kiwi/七牛/1.15.0/20181212/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml:1:1-8:12
+INJECTED from /Users/bluecity/Desktop/Work/dev/七牛and Kiwi/七牛/1.15.0/20181212/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml:1:1-8:12
+INJECTED from /Users/bluecity/Desktop/Work/dev/七牛and Kiwi/七牛/1.15.0/20181212/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml:1:1-8:12
+INJECTED from /Users/bluecity/Desktop/Work/dev/七牛and Kiwi/七牛/1.15.0/20181212/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml:1:1-8:12
+INJECTED from /Users/bluecity/Desktop/Work/dev/七牛and Kiwi/七牛/1.15.0/20181212/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml:1:1-8:12
 	package
-		ADDED from /Users/hugo/Documents/workspace/PLDroidShortVideo/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml:1:70-91
-		INJECTED from /Users/hugo/Documents/workspace/PLDroidShortVideo/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml
-		INJECTED from /Users/hugo/Documents/workspace/PLDroidShortVideo/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml
+		ADDED from /Users/bluecity/Desktop/Work/dev/七牛and Kiwi/七牛/1.15.0/20181212/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml:1:70-91
+		INJECTED from /Users/bluecity/Desktop/Work/dev/七牛and Kiwi/七牛/1.15.0/20181212/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml
+		INJECTED from /Users/bluecity/Desktop/Work/dev/七牛and Kiwi/七牛/1.15.0/20181212/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml
 	android:versionName
-		INJECTED from /Users/hugo/Documents/workspace/PLDroidShortVideo/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml
-		ADDED from /Users/hugo/Documents/workspace/PLDroidShortVideo/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml:1:1-8:12
-		INJECTED from /Users/hugo/Documents/workspace/PLDroidShortVideo/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml
+		INJECTED from /Users/bluecity/Desktop/Work/dev/七牛and Kiwi/七牛/1.15.0/20181212/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml
+		ADDED from /Users/bluecity/Desktop/Work/dev/七牛and Kiwi/七牛/1.15.0/20181212/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml:1:1-8:12
+		INJECTED from /Users/bluecity/Desktop/Work/dev/七牛and Kiwi/七牛/1.15.0/20181212/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml
 	android:versionCode
-		INJECTED from /Users/hugo/Documents/workspace/PLDroidShortVideo/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml
-		ADDED from /Users/hugo/Documents/workspace/PLDroidShortVideo/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml:1:1-8:12
-		INJECTED from /Users/hugo/Documents/workspace/PLDroidShortVideo/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml
+		INJECTED from /Users/bluecity/Desktop/Work/dev/七牛and Kiwi/七牛/1.15.0/20181212/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml
+		ADDED from /Users/bluecity/Desktop/Work/dev/七牛and Kiwi/七牛/1.15.0/20181212/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml:1:1-8:12
+		INJECTED from /Users/bluecity/Desktop/Work/dev/七牛and Kiwi/七牛/1.15.0/20181212/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml
 	xmlns:android
-		ADDED from /Users/hugo/Documents/workspace/PLDroidShortVideo/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml:1:11-69
+		ADDED from /Users/bluecity/Desktop/Work/dev/七牛and Kiwi/七牛/1.15.0/20181212/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml:1:11-69
 application
-ADDED from /Users/hugo/Documents/workspace/PLDroidShortVideo/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml:3:5-6:19
+ADDED from /Users/bluecity/Desktop/Work/dev/七牛and Kiwi/七牛/1.15.0/20181212/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml:3:5-6:19
 	android:supportsRtl
-		ADDED from /Users/hugo/Documents/workspace/PLDroidShortVideo/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml:4:9-35
+		ADDED from /Users/bluecity/Desktop/Work/dev/七牛and Kiwi/七牛/1.15.0/20181212/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml:4:9-35
 	android:label
-		ADDED from /Users/hugo/Documents/workspace/PLDroidShortVideo/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml:3:45-77
+		ADDED from /Users/bluecity/Desktop/Work/dev/七牛and Kiwi/七牛/1.15.0/20181212/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml:3:45-77
 	android:allowBackup
-		ADDED from /Users/hugo/Documents/workspace/PLDroidShortVideo/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml:3:18-44
+		ADDED from /Users/bluecity/Desktop/Work/dev/七牛and Kiwi/七牛/1.15.0/20181212/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml:3:18-44
 uses-sdk
-INJECTED from /Users/hugo/Documents/workspace/PLDroidShortVideo/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from /Users/hugo/Documents/workspace/PLDroidShortVideo/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml
-INJECTED from /Users/hugo/Documents/workspace/PLDroidShortVideo/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml
-INJECTED from /Users/hugo/Documents/workspace/PLDroidShortVideo/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml
-INJECTED from /Users/hugo/Documents/workspace/PLDroidShortVideo/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml
+INJECTED from /Users/bluecity/Desktop/Work/dev/七牛and Kiwi/七牛/1.15.0/20181212/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/bluecity/Desktop/Work/dev/七牛and Kiwi/七牛/1.15.0/20181212/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml
+INJECTED from /Users/bluecity/Desktop/Work/dev/七牛and Kiwi/七牛/1.15.0/20181212/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml
+INJECTED from /Users/bluecity/Desktop/Work/dev/七牛and Kiwi/七牛/1.15.0/20181212/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml
+INJECTED from /Users/bluecity/Desktop/Work/dev/七牛and Kiwi/七牛/1.15.0/20181212/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from /Users/hugo/Documents/workspace/PLDroidShortVideo/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml
-		ADDED from /Users/hugo/Documents/workspace/PLDroidShortVideo/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml
-		INJECTED from /Users/hugo/Documents/workspace/PLDroidShortVideo/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml
+		INJECTED from /Users/bluecity/Desktop/Work/dev/七牛and Kiwi/七牛/1.15.0/20181212/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml
+		ADDED from /Users/bluecity/Desktop/Work/dev/七牛and Kiwi/七牛/1.15.0/20181212/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml
+		INJECTED from /Users/bluecity/Desktop/Work/dev/七牛and Kiwi/七牛/1.15.0/20181212/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from /Users/hugo/Documents/workspace/PLDroidShortVideo/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml
-		ADDED from /Users/hugo/Documents/workspace/PLDroidShortVideo/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml
-		INJECTED from /Users/hugo/Documents/workspace/PLDroidShortVideo/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml
+		INJECTED from /Users/bluecity/Desktop/Work/dev/七牛and Kiwi/七牛/1.15.0/20181212/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml
+		ADDED from /Users/bluecity/Desktop/Work/dev/七牛and Kiwi/七牛/1.15.0/20181212/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml
+		INJECTED from /Users/bluecity/Desktop/Work/dev/七牛and Kiwi/七牛/1.15.0/20181212/PLDroidShortVideoDemo/kiwi/src/main/AndroidManifest.xml

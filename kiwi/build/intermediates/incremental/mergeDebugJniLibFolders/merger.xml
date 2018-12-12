@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="/Users/bluecity/Desktop/Work/dev/七牛and Kiwi/七牛/1.15.0/20181212/PLDroidShortVideoDemo/kiwi/src/main/jniLibs"><file name="armeabi-v7a/libftlib.so" path="/Users/bluecity/Desktop/Work/dev/七牛and Kiwi/七牛/1.15.0/20181212/PLDroidShortVideoDemo/kiwi/src/main/jniLibs/armeabi-v7a/libftlib.so"/></source></dataSet><dataSet config="debug"><source path="/Users/bluecity/Desktop/Work/dev/七牛and Kiwi/七牛/1.15.0/20181212/PLDroidShortVideoDemo/kiwi/src/debug/jniLibs"/></dataSet></merger>

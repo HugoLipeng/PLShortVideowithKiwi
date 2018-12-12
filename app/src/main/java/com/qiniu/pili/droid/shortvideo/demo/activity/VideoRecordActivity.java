@@ -20,14 +20,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.kiwi.tracker.bean.KwFilter;
 import com.kiwi.ui.StickerConfigMgr;
 import com.kiwi.ui.widget.KwControlView;
 import com.qiniu.pili.droid.shortvideo.PLAudioEncodeSetting;
+import com.qiniu.pili.droid.shortvideo.PLCameraParamSelectListener;
 import com.qiniu.pili.droid.shortvideo.PLCameraSetting;
 import com.qiniu.pili.droid.shortvideo.PLCaptureFrameListener;
 import com.qiniu.pili.droid.shortvideo.PLDraft;
@@ -40,9 +42,9 @@ import com.qiniu.pili.droid.shortvideo.PLRecordStateListener;
 import com.qiniu.pili.droid.shortvideo.PLShortVideoRecorder;
 import com.qiniu.pili.droid.shortvideo.PLVideoEncodeSetting;
 import com.qiniu.pili.droid.shortvideo.PLVideoFilterListener;
-import com.qiniu.pili.droid.shortvideo.PLCameraParamSelectListener;
 import com.qiniu.pili.droid.shortvideo.PLVideoFrame;
 import com.qiniu.pili.droid.shortvideo.PLVideoSaveListener;
+import com.qiniu.pili.droid.shortvideo.demo.FilterManager;
 import com.qiniu.pili.droid.shortvideo.demo.R;
 import com.qiniu.pili.droid.shortvideo.demo.utils.Config;
 import com.qiniu.pili.droid.shortvideo.demo.utils.GetPathFromUri;
@@ -118,6 +120,8 @@ public class VideoRecordActivity extends Activity implements PLRecordStateListen
     private boolean mSectionBegan;
     private KiwiTrackWrapper mKiwiTrackWrapper;
     private KwControlView mControlView;
+    private long mSectionBeginTSMs;
+    private boolean isRecording = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -224,7 +228,7 @@ public class VideoRecordActivity extends Activity implements PLRecordStateListen
                 ToastUtils.s(this, getString(R.string.toast_draft_recover_success));
             } else {
                 onSectionCountChanged(0, 0);
-                mSectionProgressBar.setFirstPointTime(RecordSettings.DEFAULT_MIN_RECORD_DURATION );
+                mSectionProgressBar.setFirstPointTime(RecordSettings.DEFAULT_MIN_RECORD_DURATION);
                 ToastUtils.s(this, getString(R.string.toast_draft_recover_fail));
             }
         }
@@ -241,7 +245,7 @@ public class VideoRecordActivity extends Activity implements PLRecordStateListen
             findViewById(R.id.btn_camera_effect).setVisibility(View.VISIBLE);
 
             mControlView = (KwControlView) findViewById(R.id.kiwi_control_layout);
-            mControlView.setOnEventListener(mKiwiTrackWrapper.initUIEventListener());
+//            mControlView.setOnEventListener(mKiwiTrackWrapper.initUIEventListener());
             mControlView.setOnPanelCloseListener(new KwControlView.OnPanelCloseListener() {
                 @Override
                 public void onClosed() {
@@ -295,23 +299,19 @@ public class VideoRecordActivity extends Activity implements PLRecordStateListen
 
             @Override
             public String onFocusModeSelected(List<String> list) {
-                for(String s:list){
-                    Log.d("hugo", "onFocusModeSelected: "+s);
-                    Log.d("hugo", "list.get(0): "+list.get(0));
+                for (String s : list) {
+                    Log.d("hugo", "onFocusModeSelected: " + s);
+                    Log.d("hugo", "list.get(0): " + list.get(0));
                 }
 
                 return list.get(0);
             }
         });
-
-        mRecordBtn.setOnTouchListener(new View.OnTouchListener() {
-            private long mSectionBeginTSMs;
-
+        mRecordBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                int action = event.getAction();
-                if (action == MotionEvent.ACTION_DOWN) {
-                    if (!mSectionBegan && mShortVideoRecorder.beginSection()) {
+            public void onClick(View v) {
+                if (!mSectionBegan) {
+                    if (mShortVideoRecorder.beginSection()) {
                         mSectionBegan = true;
                         mSectionBeginTSMs = System.currentTimeMillis();
                         mSectionProgressBar.setCurrentState(SectionProgressBar.State.START);
@@ -319,28 +319,24 @@ public class VideoRecordActivity extends Activity implements PLRecordStateListen
                     } else {
                         ToastUtils.s(VideoRecordActivity.this, "无法开始视频段录制");
                     }
-                } else if (action == MotionEvent.ACTION_UP) {
-                    if (mSectionBegan) {
-                        long sectionRecordDurationMs = System.currentTimeMillis() - mSectionBeginTSMs;
-                        long totalRecordDurationMs = sectionRecordDurationMs + (mDurationRecordStack.isEmpty() ? 0 : mDurationRecordStack.peek().longValue());
-                        double sectionVideoDurationMs = sectionRecordDurationMs / mRecordSpeed;
-                        double totalVideoDurationMs = sectionVideoDurationMs + (mDurationVideoStack.isEmpty() ? 0 : mDurationVideoStack.peek().doubleValue());
-                        mDurationRecordStack.push(new Long(totalRecordDurationMs));
-                        mDurationVideoStack.push(new Double(totalVideoDurationMs));
-                        if (mRecordSetting.IsRecordSpeedVariable()) {
-                            Log.d(TAG,"SectionRecordDuration: " + sectionRecordDurationMs + "; sectionVideoDuration: " + sectionVideoDurationMs + "; totalVideoDurationMs: " + totalVideoDurationMs + "Section count: " + mDurationVideoStack.size());
-                            mSectionProgressBar.addBreakPointTime((long) totalVideoDurationMs);
-                        } else {
-                            mSectionProgressBar.addBreakPointTime(totalRecordDurationMs);
-                        }
-
-                        mSectionProgressBar.setCurrentState(SectionProgressBar.State.PAUSE);
-                        mShortVideoRecorder.endSection();
-                        mSectionBegan = false;
+                }else{
+                    long sectionRecordDurationMs = System.currentTimeMillis() - mSectionBeginTSMs;
+                    long totalRecordDurationMs = sectionRecordDurationMs + (mDurationRecordStack.isEmpty() ? 0 : mDurationRecordStack.peek().longValue());
+                    double sectionVideoDurationMs = sectionRecordDurationMs / mRecordSpeed;
+                    double totalVideoDurationMs = sectionVideoDurationMs + (mDurationVideoStack.isEmpty() ? 0 : mDurationVideoStack.peek().doubleValue());
+                    mDurationRecordStack.push(new Long(totalRecordDurationMs));
+                    mDurationVideoStack.push(new Double(totalVideoDurationMs));
+                    if (mRecordSetting.IsRecordSpeedVariable()) {
+                        Log.d(TAG, "SectionRecordDuration: " + sectionRecordDurationMs + "; sectionVideoDuration: " + sectionVideoDurationMs + "; totalVideoDurationMs: " + totalVideoDurationMs + "Section count: " + mDurationVideoStack.size());
+                        mSectionProgressBar.addBreakPointTime((long) totalVideoDurationMs);
+                    } else {
+                        mSectionProgressBar.addBreakPointTime(totalRecordDurationMs);
                     }
-                }
 
-                return false;
+                    mSectionProgressBar.setCurrentState(SectionProgressBar.State.PAUSE);
+                    mShortVideoRecorder.endSection();
+                    mSectionBegan = false;
+                }
             }
         });
         mGestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
@@ -351,6 +347,49 @@ public class VideoRecordActivity extends Activity implements PLRecordStateListen
                 mShortVideoRecorder.manualFocus(mFocusIndicator.getWidth(), mFocusIndicator.getHeight(), (int) e.getX(), (int) e.getY());
                 return false;
             }
+
+            @Override
+            public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+                return false;
+            }
+
+            @Override
+            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+                float distanceY = e1.getY() - e2.getY();
+                KwFilter filter;
+                if (distanceY > 0 && distanceY > 80 && Math.abs(velocityY) > Math.abs(velocityX)) {
+                    int size = FilterManager.filters.size();
+                    if (size <= 0) {
+                        Toast.makeText(getBaseContext(), "没有滤镜数据...", Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                    FilterManager.currentFilterPos++;
+                    if (FilterManager.currentFilterPos >= size) {
+                        FilterManager.currentFilterPos = 0;
+                    }
+                    filter = FilterManager.filters.get(FilterManager.currentFilterPos);
+                    Toast.makeText(getBaseContext(), " 向上滑.选择了" + filter.getName(), Toast.LENGTH_SHORT).show();
+                    mKiwiTrackWrapper.setFilter(filter, true);
+                    return true;
+                }
+                if (distanceY < 0 && Math.abs(distanceY) > 80 && Math.abs(velocityY) > Math.abs(velocityX)) {
+                    int size = FilterManager.filters.size();
+                    if (size <= 0) {
+                        Toast.makeText(getBaseContext(), "没有滤镜数据...", Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                    FilterManager.currentFilterPos--;
+                    if (FilterManager.currentFilterPos < 0) {
+                        FilterManager.currentFilterPos = FilterManager.filters.size() - 1;
+                    }
+                    filter = FilterManager.filters.get(FilterManager.currentFilterPos);
+                    Toast.makeText(getBaseContext(), " 向下滑.选择了" + filter.getName(), Toast.LENGTH_SHORT).show();
+                    mKiwiTrackWrapper.setFilter(filter, true);
+                    return true;
+                }
+                return false;
+            }
+
         });
         preview.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -371,6 +410,12 @@ public class VideoRecordActivity extends Activity implements PLRecordStateListen
         };
         if (mOrientationListener.canDetectOrientation()) {
             mOrientationListener.enable();
+        }
+
+        FilterManager.getFilters(getBaseContext());
+        if (FilterManager.filters == null) {
+            Toast.makeText(getBaseContext(), "滤镜列表获取失败", Toast.LENGTH_SHORT).show();
+            finish();
         }
     }
 
@@ -616,7 +661,7 @@ public class VideoRecordActivity extends Activity implements PLRecordStateListen
 
     @Override
     public void onSectionDecreased(long decDuration, long totalDuration, int sectionCount) {
-        Log.d("onSectionDecreased", "decDuration: " + decDuration + "; totalDuration: " + totalDuration +"sectionCount:  "+sectionCount);
+        Log.d("onSectionDecreased", "decDuration: " + decDuration + "; totalDuration: " + totalDuration + "sectionCount:  " + sectionCount);
         mSectionProgressBar.removeLastBreakPoint();
         if (!mDurationVideoStack.isEmpty()) {
             mDurationVideoStack.pop();

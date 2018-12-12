@@ -29,7 +29,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.kiwi.tracker.bean.KwFilter;
 import com.kiwi.ui.StickerConfigMgr;
 import com.kiwi.ui.widget.KwControlView;
 import com.qiniu.pili.droid.shortvideo.PLBuiltinFilter;
@@ -42,6 +44,7 @@ import com.qiniu.pili.droid.shortvideo.PLVideoEditSetting;
 import com.qiniu.pili.droid.shortvideo.PLVideoFilterListener;
 import com.qiniu.pili.droid.shortvideo.PLVideoSaveListener;
 import com.qiniu.pili.droid.shortvideo.PLWatermarkSetting;
+import com.qiniu.pili.droid.shortvideo.demo.FilterManager;
 import com.qiniu.pili.droid.shortvideo.demo.R;
 import com.qiniu.pili.droid.shortvideo.demo.utils.Config;
 import com.qiniu.pili.droid.shortvideo.demo.utils.GetPathFromUri;
@@ -135,6 +138,7 @@ public class VideoEditActivity extends Activity implements PLVideoSaveListener {
     private KwControlView mControlView;
 
     private PLCameraSetting mCameraSetting;
+    private GestureDetector mGestureDetector;
 
     public static void start(Activity activity, String mp4Path) {
         Intent intent = new Intent(activity, VideoEditActivity.class);
@@ -198,6 +202,12 @@ public class VideoEditActivity extends Activity implements PLVideoSaveListener {
         initShortVideoEditor();
         initFiltersList();
         initAudioMixSettingDialog();
+
+        FilterManager.getFilters(getBaseContext());
+        if (FilterManager.filters == null) {
+            Toast.makeText(getBaseContext(), "滤镜列表获取失败", Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
 
     public void onClickShowKiwi(View v) {
@@ -217,7 +227,6 @@ public class VideoEditActivity extends Activity implements PLVideoSaveListener {
         }
         super.finish();
     }
-
 
 
     /**
@@ -420,7 +429,7 @@ public class VideoEditActivity extends Activity implements PLVideoSaveListener {
         mSaveWatermarkSetting = createWatermarkSetting();
     }
 
-    private PLWatermarkSetting createWatermarkSetting(){
+    private PLWatermarkSetting createWatermarkSetting() {
         PLWatermarkSetting watermarkSetting = new PLWatermarkSetting();
         watermarkSetting.setResourceId(R.drawable.qiniu_logo);
         watermarkSetting.setPosition(0.01f, 0.01f);
@@ -487,6 +496,57 @@ public class VideoEditActivity extends Activity implements PLVideoSaveListener {
 
     private void initPreviewView() {
         mPreviewView = (GLSurfaceView) findViewById(R.id.preview);
+        mGestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
+            @Override
+            public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+                return false;
+            }
+
+            @Override
+            public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+                float distanceY = e1.getY() - e2.getY();
+                KwFilter filter;
+                if (distanceY > 0 && distanceY > 80 && Math.abs(velocityY) > Math.abs(velocityX)) {
+                    int size = FilterManager.filters.size();
+                    if (size <= 0) {
+                        Toast.makeText(getBaseContext(), "没有滤镜数据...", Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                    FilterManager.currentFilterPos++;
+                    if (FilterManager.currentFilterPos >= size) {
+                        FilterManager.currentFilterPos = 0;
+                    }
+                    filter = FilterManager.filters.get(FilterManager.currentFilterPos);
+                    Toast.makeText(getBaseContext(), " 向上滑.选择了" + filter.getName(), Toast.LENGTH_SHORT).show();
+                    mKiwiTrackWrapper.setFilter(filter, true);
+                    return true;
+                }
+                if (distanceY < 0 && Math.abs(distanceY) > 80 && Math.abs(velocityY) > Math.abs(velocityX)) {
+                    int size = FilterManager.filters.size();
+                    if (size <= 0) {
+                        Toast.makeText(getBaseContext(), "没有滤镜数据...", Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                    FilterManager.currentFilterPos--;
+                    if (FilterManager.currentFilterPos < 0) {
+                        FilterManager.currentFilterPos = FilterManager.filters.size() - 1;
+                    }
+                    filter = FilterManager.filters.get(FilterManager.currentFilterPos);
+                    Toast.makeText(getBaseContext(), " 向下滑.选择了" + filter.getName(), Toast.LENGTH_SHORT).show();
+                    mKiwiTrackWrapper.setFilter(filter, true);
+                    return true;
+                }
+                return false;
+            }
+
+        });
+        mPreviewView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                mGestureDetector.onTouchEvent(motionEvent);
+                return true;
+            }
+        });
         mPreviewView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
